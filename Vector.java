@@ -119,13 +119,22 @@ public class Vector {
             heap(i, numElemVector, vectorHeap); //Se crea el monton
 
         int right = numElemVector;
+        while(right > 1){
+            int aux = vectorHeap[right];
+            vectorHeap[right] = vectorHeap[1];
+            vectorHeap[1] = aux;
+            right--;
+            heap(1, right, vectorHeap);
+        }
+
+        /*
         for( int i = n-1; i > 1; i--){
             int aux = vector[right];
             vector[right] = vector[1];
             vector[1] = aux;
             right--;
             heap(1, right, vectorHeap);
-        }
+        } */
 
         for(int i = 0; i<n; i++)
             vector[i] = vectorHeap[i+1]; // copia vectorHeap a vector con desplazamiento de 
