@@ -1,6 +1,4 @@
 
-package com.mycompany.vector;
-
 public class Vector {
     
     private int[] vector; //Datos de la EDA
@@ -134,7 +132,5 @@ public class Vector {
             salida += vector[i] + ", ";
         return salida;
     }
-
-    //Comentario de prueba
     
 }
