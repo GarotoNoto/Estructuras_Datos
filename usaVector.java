@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 public class usaVector() {
   public static void main(String[] args){
 
@@ -13,3 +15,4 @@ public class usaVector() {
     System.out.println(vec);
   }
 }
+>>>>>>> 312ef2b96a94544f582c58f84dd7fa92bbc4da0c

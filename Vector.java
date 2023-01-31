@@ -9,9 +9,16 @@ public class Vector {
         //Crea tu primer vector (array dinamico)
     public Vector() {
         numElemVector = 0;
-        tamanoVect = 10; //Capacidad del vector
+        tamanoVect = 4; //Capacidad del vector
         vector = new int[tamanoVect];
     }
+
+    public Vector(int tamanoVect){
+        numElemVector = 0; //No hay elementos
+        this.tamanoVect = tamanoVect; //Capacidad del vector
+        vector = new int[tamanoVect];
+    }
+
 
     public Vector(Vector origen) { //Cuando se crea un vector sí es para copiar
         this.tamanoVect = origen.tamanoVect;
