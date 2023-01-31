@@ -96,18 +96,17 @@ public class Vector {
         int j = 2*i;
         int dato = w[i]; // dato a ubicar
 
-        do {
+        while(j <= r){
             if(j<r && w[j] > w[j+1])
                 j++; //Toma el valor de la derecha
-            if(dato > vector[j])
-                vector[i] = v[j];
+            if(dato > w[j])
+                w[i] = w[j];
             else break;
+            i = j;  //desciende
+            j = 2*i; //desciende
+        }
 
-            i = j;  // desciende
-            j = 2*i; // desciende
-        } while(j <= r);
-
-        vector[i] = dato;
+        w[i] = dato;
     }
 
     public void heapSort() {
