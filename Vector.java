@@ -91,22 +91,22 @@ public class Vector {
     }
     
 
-    private void heap (int L, int r, int[] w){ // r la posición mas para abajo, el ultimo
+    private void heap (int L, int r, int[] vectorHeap){ // r la posición mas para abajo, el ultimo
         int i = L;
         int j = 2*i;
-        int dato = w[i]; // dato a ubicar
+        int dato = vectorHeap[i]; // dato a ubicar
 
         while(j <= r){
-            if(j<r && w[j] > w[j+1])
+            if(j<r && vectorHeap[j] > vectorHeap[j+1])
                 j++; //Toma el valor de la derecha
-            if(dato > w[j])
-                w[i] = w[j];
+            if(dato > vectorHeap[j])
+                w[i] = vectorHeap[j];
             else break;
             i = j;  //desciende
             j = 2*i; //desciende
         }
 
-        w[i] = dato;
+        vectorHeap[i] = dato;
     }
 
     public void heapSort() {
@@ -143,7 +143,7 @@ public class Vector {
     @Override
     public String toString(){
         String salida = "";
-        
+
         for (int i = 0; i<n; i++)
             if (i % 9 == 0)
             System.out.println();
