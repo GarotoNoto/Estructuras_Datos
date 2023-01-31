@@ -142,9 +142,13 @@ public class Vector {
     // puedes agregar un if para eliminar la ultima ","
     @Override
     public String toString(){
-        String salida = "Dato = ";
-        for(int i = 0;  i < numElemVector; i++) 
-            salida += vector[i] + ", ";
+        String salida = "";
+        
+        for (int i = 0; i<n; i++)
+            if (i % 9 == 0)
+            System.out.println();
+        System.out.print(v[i] + "\t");
+
         return salida;
     }
     
