@@ -144,12 +144,12 @@ public class Vector {
     public String toString(){
         String salida = "";
 
-        for (int i = 0; i<n; i++)
-            if (i % 9 == 0)
-            System.out.println();
-        System.out.print(v[i] + "\t");
+        StringBuffer salida = new StringBuffer();
 
-        return salida;
+        for (int i = 0; i<n; i++)
+            salida.append(vector[i] + "\t");
+
+        return salida.toString();
     }
     
 }
