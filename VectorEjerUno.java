@@ -7,18 +7,19 @@
      */
 
 public class VectorEjerUno {
-
+    
     private int[] vector;
     private int tamanoVector;
     private int numElemVector;  //Es como un pointer que apunta hacia el ultimo numero, es tambien el numero de elementos en el vector
+    private boolean bandera = false;
 
-    public ejercicio_1_Vector () {
+    public VectorEjerUno() {
         numElemVector = 0;
         tamanoVector = 5;
         vector = new int[tamanoVector];
     }
 
-    public ejercicio_1_Vector ( int tamanoVector){
+    public VectorEjerUno( int tamanoVector){
         numElemVector = 0;
         this.tamanoVector = tamanoVector;
         vector = new int[tamanoVector];
@@ -67,10 +68,9 @@ public class VectorEjerUno {
     public boolean saberVacio() {
         if(this.numElemVector == 0){
             System.out.println("El vector esta vacio :(");
-            return true;
-        } else if (this.numElemVector > 0) {
-            System.out.println("El vector ya tiene elementos :)");
-            return false;
+            bandera = true;
+        } else {
+            bandera = true;
         }
 
         /* Otra forma de hacerlo seria comprobar si el primer elemento es 0 nulo o false*/
@@ -80,9 +80,10 @@ public class VectorEjerUno {
             return true;
         }
             */
+        return bandera;
     }
 
-    public ultimoNum() {
+    public void ultimoNum() {
         System.out.println("El ultimo numero del vector es: " + vector[numElemVector]);
     }
 
