@@ -10,7 +10,7 @@ public class ejercicio_1_Vector {
 
     private int[] vector;
     private int tamanoVector;
-    private int numElemVector;
+    private int numElemVector;  //Es como un pointer que apunta hacia el ultimo numero, es tambien el numero de elementos en el vector
 
     public ejercicio_1_Vector () {
         numElemVector = 0;
@@ -59,8 +59,6 @@ public class ejercicio_1_Vector {
 
     public void bajaNum() {
 
-
-
     }
 
 
@@ -83,9 +81,7 @@ public class ejercicio_1_Vector {
     }
 
     public ultimoNum() {
-
-
-
+        System.out.println("El ultimo numero del vector es: " + vector[numElemVector]);
     }
 
 }
