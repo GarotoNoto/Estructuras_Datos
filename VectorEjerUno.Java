@@ -6,7 +6,7 @@
      * 4) Para que te de el ultimo numero ( de la mas a la dercha )
      */
 
-public class ejercicio_1_Vector {
+public class VectorEjerUno {
 
     private int[] vector;
     private int tamanoVector;
