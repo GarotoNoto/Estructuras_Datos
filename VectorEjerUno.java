@@ -25,24 +25,6 @@ public class VectorEjerUno {
         vector = new int[tamanoVector];
     }
 
-    private void heap (int L, int r, int[] vectorHeap){ // r la posición mas para abajo, el ultimo
-        int i = L;
-        int j = 2*i;
-        int dato = vectorHeap[i]; // dato a ubicar
-
-        while(j <= r){
-            if(j<r && vectorHeap[j] > vectorHeap[j+1])
-                j++; //Toma el valor de la derecha
-            if(dato > vectorHeap[j])
-                vectorHeap[i] = vectorHeap[j];
-            else break;
-            i = j;  //desciende
-            j = 2*i; //desciende
-        }
-
-        vectorHeap[i] = dato;
-    }
-
     public void altaNum(int nuevoNum) {
         // Se comprueba que el vector tenga espacio, sino se le agregan otros diez lugares
         if(this.numElemVector == this.tamanoVector){
@@ -85,6 +67,17 @@ public class VectorEjerUno {
 
     public void ultimoNum() {
         System.out.println("El ultimo numero del vector es: " + vector[numElemVector]);
+    }
+
+    @Override
+    public String toString(){
+        String salida = "";
+
+        for(int i = 0; i<numElemVector; i++){
+            System.out.print(vector[i] + " ");
+        }
+
+        return salida.toString();
     }
 
 }
