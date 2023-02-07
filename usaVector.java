@@ -6,6 +6,7 @@ public class usaVector {
     for(int i = 0; i < 1000; i++){
       vec.altaPos(i, (int)(Math.random()*1000));
     }
+    
     System.out.println("Datos desordenados: ");
     System.out.println(vec);
 

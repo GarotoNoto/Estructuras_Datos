@@ -138,6 +138,7 @@ public class Vector {
         for(int i = 0; i<numElemVector; i++)
             vector[i] = vectorHeap[i+1]; // copia vectorHeap a vector con desplazamiento de 
     }
+
     
     @Override
     public String toString(){
