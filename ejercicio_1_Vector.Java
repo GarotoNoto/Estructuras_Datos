@@ -65,9 +65,21 @@ public class ejercicio_1_Vector {
 
 
     public boolean saberVacio() {
+        if(this.numElemVector == 0){
+            System.out.println("El vector esta vacio :(");
+            return true;
+        } else if (this.numElemVector > 0) {
+            System.out.println("El vector ya tiene elementos :)");
+            return false;
+        }
 
-
-
+        /* Otra forma de hacerlo seria comprobar si el primer elemento es 0 nulo o false*/
+            /*
+        if(this.vector[0] == 0 || this.vector[0] == null){
+            System.out.println("El vector esta vacio :(");
+            return true;
+        }
+            */
     }
 
     public ultimoNum() {
