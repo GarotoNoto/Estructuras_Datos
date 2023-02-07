@@ -100,7 +100,7 @@ public class Vector {
             if(j<r && vectorHeap[j] > vectorHeap[j+1])
                 j++; //Toma el valor de la derecha
             if(dato > vectorHeap[j])
-                w[i] = vectorHeap[j];
+                vectorHeap[i] = vectorHeap[j];
             else break;
             i = j;  //desciende
             j = 2*i; //desciende
@@ -143,10 +143,11 @@ public class Vector {
     public String toString(){
         String salida = "";
         
-        for (int i = 0; i<n; i++)
+        for (int i = 0; i<numElemVector; i++){
             if (i % 9 == 0)
             System.out.println();
-        System.out.print(v[i] + "\t");
+        System.out.print(vector[i] + "\t");
+        }
 
         return salida.toString();
     }
