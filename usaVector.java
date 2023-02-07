@@ -1,4 +1,4 @@
-public class usaVector() {
+public class usaVector {
   public static void main(String[] args){
 
     Vector vec = new Vector(1000);

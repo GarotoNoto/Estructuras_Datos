@@ -25,7 +25,7 @@ public class Vector {
         this.numElemVector = origen.numElemVector;
         this.vector = new int[tamanoVect];
 
-        for (int i=0; i<n; i++)
+        for (int i=0; i<numElemVector; i++)
             this.vector[i] = origen.vector[i];
     }
     
@@ -85,7 +85,7 @@ public class Vector {
         if (posicion < 0)
             return false;
         for(int i = posicion; i < numElemVector - 1; i++)
-            vector[i] = v[i+1];
+            vector[i] = vector[i+1];
         numElemVector--;
         return true;
     }
@@ -114,7 +114,7 @@ public class Vector {
         for(int i = 0; i<numElemVector; i++)
             vectorHeap[i+1] = vector[i];    //copia vector a vectorHeap con despazamiento
 
-        for(int i = n/2; i>0; i--)
+        for(int i = numElemVector/2; i>0; i--)
             heap(i, numElemVector, vectorHeap); //Se crea el monton
 
         int right = numElemVector;
@@ -135,19 +135,19 @@ public class Vector {
             heap(1, right, vectorHeap);
         } */
 
-        for(int i = 0; i<n; i++)
+        for(int i = 0; i<numElemVector; i++)
             vector[i] = vectorHeap[i+1]; // copia vectorHeap a vector con desplazamiento de 
     }
     
-    // puedes agregar un if para eliminar la ultima ","
     @Override
     public String toString(){
         String salida = "";
         
-        for (int i = 0; i<n; i++)
+        for (int i = 0; i<numElemVector; i++){
             if (i % 9 == 0)
             System.out.println();
-        System.out.print(v[i] + "\t");
+        System.out.print(vector[i] + "\t");
+        }
 
         return salida;
     }
