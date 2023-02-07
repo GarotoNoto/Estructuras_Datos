@@ -52,6 +52,7 @@ public class VectorEjerUno {
             System.out.println("El vector esta vacio :(");
             bandera = true;
         } else {
+            System.out.println("El vector no esta vacio :)");
             bandera = true;
         }
 
