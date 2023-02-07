@@ -14,7 +14,7 @@ public class ejercicio_1_Vector {
 
     public ejercicio_1_Vector () {
         numElemVector = 0;
-        tamanoVector = 4;
+        tamanoVector = 5;
         vector = new int[tamanoVector];
     }
 
@@ -53,12 +53,13 @@ public class ejercicio_1_Vector {
             vector = vectorAux;  //vector hace referencia a vectorAux
         }
 
-        
+        vector[numElemVector] = nuevoNum;
+        numElemVector++; //numElemVector += 1;
 
     }
 
     public void bajaNum() {
-
+        
     }
 
 
