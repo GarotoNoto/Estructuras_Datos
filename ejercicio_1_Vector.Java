@@ -2,7 +2,7 @@
     /* 
      * 1) Para meter (por la derecha, al final)
      * 2) Para sacar 
-     * 3) para saber si est vacio
+     * 3) para saber si esta vacio
      * 4) Para que te de el ultimo numero ( de la mas a la dercha )
      */
 
@@ -42,7 +42,38 @@ public class ejercicio_1_Vector {
         vectorHeap[i] = dato;
     }
 
-    
+    public void altaNum(int nuevoNum) {
+        // Se comprueba que el vector tenga espacio, sino se le agregan otros diez lugares
+        if(this.numElemVector == this.tamanoVector){
+            tamanoVector += 10; //Se le da 10 nuevos espacios
+            int[] vectorAux = new int[tamanoVector];
+            for(int i = 0; i<numElemVector ;i++){
+                vectorAux[i] = vector[i];
+            }
+            vector = vectorAux;  //vector hace referencia a vectorAux
+        }
 
+        
+
+    }
+
+    public void bajaNum() {
+
+
+
+    }
+
+
+    public boolean saberVacio() {
+
+
+
+    }
+
+    public ultimoNum() {
+
+
+
+    }
 
 }
