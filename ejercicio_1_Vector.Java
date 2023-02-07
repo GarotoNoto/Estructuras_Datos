@@ -59,7 +59,8 @@ public class ejercicio_1_Vector {
     }
 
     public void bajaNum() {
-        
+        vector[numElemVector] = 0;
+        numElemVector--; //numElemVector -= 1;
     }
 
 
