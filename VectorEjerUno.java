@@ -37,13 +37,13 @@ public class VectorEjerUno {
         }
 
         vector[numElemVector] = nuevoNum;
-        numElemVector++; //numElemVector += 1;
+        numElemVector += 1; //numElemVector++;
 
     }
 
     public void bajaNum() {
         vector[numElemVector] = 0;
-        numElemVector--; //numElemVector -= 1;
+        numElemVector -= 1; //numElemVector--;
     }
 
 
@@ -53,7 +53,7 @@ public class VectorEjerUno {
             bandera = true;
         } else {
             System.out.println("El vector no esta vacio :)");
-            bandera = true;
+            bandera = false;
         }
 
         /* Otra forma de hacerlo seria comprobar si el primer elemento es 0 nulo o false*/
