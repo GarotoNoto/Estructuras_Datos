@@ -9,7 +9,7 @@ public class Proyecto_1_Calculadora extends JFrame{
     JLabel labelResultado = new JLabel("Introduzca la expreción algebraica a evaluar");
     JTextField entrada = new JTextField();
     JButton botonResul = new JButton("Evaluar");
-    JButton botonNotacion = new JButton("Sacar NP");
+    JButton botonNotacion = new JButton("NP");
     JButton botonBorrar = new JButton("CC");
     String notacionRespuesta;
 
@@ -20,7 +20,7 @@ public class Proyecto_1_Calculadora extends JFrame{
 
         //Label que muestra el resultado
 
-        labelResultado.setBounds(118,62, 240,40);
+        labelResultado.setBounds(127,60, 250,40);
 
         //Codigo que cambia el tamaño de la fuente
         Font FontOriginal = labelResultado.getFont();
@@ -44,26 +44,27 @@ public class Proyecto_1_Calculadora extends JFrame{
         // Text Field entrada
 
         entrada.setBounds(20, 20, 290, 30);
-        /*
+
         entrada.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
                 super.mouseReleased(e);
-                labelResultado.setText("");
+                notacionRespuesta = "";
+                labelResultado.setText(notacionRespuesta);
             }
         });
-         */
+
         add(entrada);
 
         //Boton de evaluar
 
-        botonResul.setBounds(20, 70, 40,40);
+        botonResul.setBounds(20, 70, 45,40);
         botonResul.setFont(new Font(FontOriginal.getName(), Font.BOLD, 10));
         botonResul.setMargin(new Insets(0, 0, 0, 0));
         botonResul.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (notacionRespuesta != ""){
+                if (!notacionRespuesta.equals("")){
                     labelResultado.setText(evaluar(notacionRespuesta));
                 } else {
                     labelResultado.setText(evaluar(getTokens()));
@@ -73,7 +74,7 @@ public class Proyecto_1_Calculadora extends JFrame{
         add(botonResul);
 
         //Boton Notación
-        botonNotacion.setBounds(70, 70, 40, 40);
+        botonNotacion.setBounds(70, 70, 45, 40);
         botonNotacion.setFont(new Font(FontOriginal.getName(), Font.BOLD, 10));
         botonNotacion.setMargin(new Insets(0, 0, 0, 0));
         botonNotacion.addActionListener(new ActionListener() {
@@ -92,7 +93,10 @@ public class Proyecto_1_Calculadora extends JFrame{
         botonBorrar.setFont(new Font(FontOriginal.getName(), Font.BOLD, 10));
         botonBorrar.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) { entrada.setText(" "); }
+            public void actionPerformed(ActionEvent e) {
+                notacionRespuesta = "";
+                entrada.setText(" ");
+            }
         });
         add(botonBorrar);
 
