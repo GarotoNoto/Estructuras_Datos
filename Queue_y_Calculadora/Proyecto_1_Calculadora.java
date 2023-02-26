@@ -5,12 +5,21 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Proyecto_1_Calculadora extends JFrame{
-    //JFrame frame;
-    int i = 0;
+
+    JLabel labelResultado = new JLabel("Introduzca la expreción algebraica a evaluar");
+    JTextField entrada = new JTextField();
+    JButton botonResul = new JButton("Evaluar");
+    JButton botonNotacion = new JButton("Sacar NP");
+    JButton botonBorrar = new JButton("CC");
+    String notacionRespuesta;
 
     Proyecto_1_Calculadora(){
+
+
+        //  PARTE DE INTERFAZ GRÁFICA
+
         //Label que muestra el resultado
-        JLabel labelResultado = new JLabel("Introduzca la expreción algebraica a evaluar");
+
         labelResultado.setBounds(118,62, 240,40);
 
         //Codigo que cambia el tamaño de la fuente
@@ -33,8 +42,9 @@ public class Proyecto_1_Calculadora extends JFrame{
         add(labelResultado);
 
         // Text Field entrada
-        JTextField entrada = new JTextField();
-        entrada.setBounds(20, 20, 330, 30);
+
+        entrada.setBounds(20, 20, 290, 30);
+        /*
         entrada.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
@@ -42,20 +52,49 @@ public class Proyecto_1_Calculadora extends JFrame{
                 labelResultado.setText("");
             }
         });
+         */
         add(entrada);
 
-        //Boton de signo igual
-        JButton botonResul = new JButton("=");
-        botonResul.setBounds(20, 70, 80,50);
+        //Boton de evaluar
+
+        botonResul.setBounds(20, 70, 40,40);
+        botonResul.setFont(new Font(FontOriginal.getName(), Font.BOLD, 10));
+        botonResul.setMargin(new Insets(0, 0, 0, 0));
         botonResul.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                labelResultado.setText("Lo logramos :)");
+                if (notacionRespuesta != ""){
+                    labelResultado.setText(evaluar(notacionRespuesta));
+                } else {
+                    labelResultado.setText(evaluar(getTokens()));
+                }
             }
         });
         add(botonResul);
 
+        //Boton Notación
+        botonNotacion.setBounds(70, 70, 40, 40);
+        botonNotacion.setFont(new Font(FontOriginal.getName(), Font.BOLD, 10));
+        botonNotacion.setMargin(new Insets(0, 0, 0, 0));
+        botonNotacion.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                notacionRespuesta = getTokens();
+                labelResultado.setText(notacionRespuesta);
+            }
+        });
+        add(botonNotacion);
 
+        //Boton borrar "CC"
+
+        botonBorrar.setBounds(320,21,30,29);
+        botonBorrar.setMargin(new Insets(0, 0, 0, 0));
+        botonBorrar.setFont(new Font(FontOriginal.getName(), Font.BOLD, 10));
+        botonBorrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { entrada.setText(" "); }
+        });
+        add(botonBorrar);
 
 
         setSize(380, 170);
@@ -64,6 +103,36 @@ public class Proyecto_1_Calculadora extends JFrame{
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Calculadora de expreciones algebraicas");
         setResizable(false);
+
+    }
+
+    //  PARTE DE NOTACIÓN POSTFIJA
+    String getTokens() {
+        String items = "";
+        String subc = "";
+        String expre = entrada.getText();
+        for(int i=0; i<expre.length(); i++ ) {
+            if(expre.charAt(i) == '+' ||
+                    expre.charAt(i) == '-' ||
+                    expre.charAt(i) == '*' ||
+                    expre.charAt(i) == '/' ||
+                    expre.charAt(i) == '!' ||
+                    expre.charAt(i) == '_' ||
+                    expre.charAt(i) == '(' ||
+                    expre.charAt(i) == ')' ) {
+                if(subc.length()>0) items += subc +", ";
+                subc = "";
+                items += expre.substring(i,i+1) + ",";
+            } else subc += expre.substring(i,i+1) ;
+        }
+        if(subc.length()>0) items += subc +", ";
+        return items;
+    }
+
+    // Metodo para evaluar la NP
+    String evaluar( String NP ){
+
+        return "Q";
     }
 
     public static void main(String[] args){
