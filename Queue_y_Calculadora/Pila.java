@@ -9,13 +9,13 @@ package Queue_y_Calculadora;
 public class Pila {
     String[] pila;
     int tamano;
-    int pointer;
+    int apuntador;
 
     //Constructor
     public Pila (int tamano){
         pila = new String[tamano];
         this.tamano = tamano;
-        pointer = 0;
+        apuntador = 0;
         pila[0] = null;
     }
 
@@ -28,24 +28,40 @@ public class Pila {
     }
 
     public boolean lleno(){
-        return false;
+        return true;
     }
 
     public boolean push (String elemento) {
-        if(lleno())
-            return false;
-        pila[pointer + 1] = elemento;
+//        if(lleno())
+//            return false;
+        pila[apuntador + 1] = elemento;
+        this.apuntador++;
         return true;
     }
 
     public boolean pop () {
-        if(vacio())
-            return false;
-        pointer--;
+//        if(vacio())
+//            return false;
+        this.apuntador--;
         return true;
     }
 
     public String peek() {
-        return pila[pointer];
+        return pila[apuntador];
+    }
+
+    public static void main(String[] args){
+        Pila pilaPrueba = new Pila();
+
+        pilaPrueba.push("a");
+        pilaPrueba.push("b");
+        pilaPrueba.push("c");
+
+        pilaPrueba.pop();
+        pilaPrueba.pop();
+        //pila.apuntador = pila.apuntador - 1;
+
+        pilaPrueba.push("d");
+        pilaPrueba.push("e");
     }
 }
