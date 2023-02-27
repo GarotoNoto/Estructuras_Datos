@@ -15,16 +15,16 @@ public class Pila {
     public Pila (int tamano){
         pila = new String[tamano];
         this.tamano = tamano;
-        apuntador = 0;
-        pila[0] = null;
+        apuntador = -1;
+        //pila[0] = null;
     }
 
     public Pila(){      //Siempre tendrá el tamaño de 6, a menos que se especifique de otra manera
-        this(6);
+        this(5);
     }
 
     public boolean vacia() {
-        return apuntador == 0;
+        return apuntador == -1;
     }
 
     public boolean llena(){
@@ -65,11 +65,15 @@ public class Pila {
         Pila pilaPrueba = new Pila();
 
         pilaPrueba.pop();
+        pilaPrueba.pop();
+        pilaPrueba.pop();
 
         pilaPrueba.push("a");
         pilaPrueba.push("b");
         pilaPrueba.push("c");
 
+        pilaPrueba.pop();
+        pilaPrueba.pop();
         pilaPrueba.pop();
         pilaPrueba.pop();
 
@@ -78,5 +82,6 @@ public class Pila {
         pilaPrueba.push("f");
         pilaPrueba.push("g");
         pilaPrueba.push("h");
+        pilaPrueba.push("i");
     }
 }
