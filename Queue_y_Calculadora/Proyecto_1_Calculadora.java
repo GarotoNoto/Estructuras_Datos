@@ -11,7 +11,7 @@ public class Proyecto_1_Calculadora extends JFrame{
     JButton botonResul = new JButton("Evaluar");
     JButton botonNotacion = new JButton("NP");
     JButton botonBorrar = new JButton("CC");
-    String notacionRespuesta;
+    String notacionRespuesta = "";
 
     Proyecto_1_Calculadora(){
 
@@ -50,23 +50,23 @@ public class Proyecto_1_Calculadora extends JFrame{
             public void mouseReleased(MouseEvent e) {
                 super.mouseReleased(e);
                 notacionRespuesta = "";
-                labelResultado.setText(notacionRespuesta);
+                //labelResultado.setText(notacionRespuesta);
             }
         });
 
         add(entrada);
 
         //Boton de evaluar
-
         botonResul.setBounds(20, 70, 45,40);
         botonResul.setFont(new Font(FontOriginal.getName(), Font.BOLD, 10));
         botonResul.setMargin(new Insets(0, 0, 0, 0));
         botonResul.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!notacionRespuesta.equals("")){
+                if (notacionRespuesta.equals("")){      //Si está vacia
+                    notacionRespuesta = getTokens();
                     labelResultado.setText(evaluar(notacionRespuesta));
-                } else {
+                } else {                                // Si ya tiene algo
                     labelResultado.setText(evaluar(getTokens()));
                 }
             }
@@ -107,7 +107,6 @@ public class Proyecto_1_Calculadora extends JFrame{
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Calculadora de expreciones algebraicas");
         setResizable(false);
-
     }
 
     //  PARTE DE NOTACIÓN POSTFIJA
@@ -120,23 +119,30 @@ public class Proyecto_1_Calculadora extends JFrame{
                     expre.charAt(i) == '-' ||
                     expre.charAt(i) == '*' ||
                     expre.charAt(i) == '/' ||
-                    expre.charAt(i) == '!' ||
-                    expre.charAt(i) == '_' ||
+                    expre.charAt(i) == '!' || // Menos unitario
+                    expre.charAt(i) == '_' || // Raiz Cuadrada
+                    expre.charAt(i) == '^' || // exponente
+                    //expre.charAt(i) == 'e' || // Func. Seno
                     expre.charAt(i) == '(' ||
-                    expre.charAt(i) == ')' ) {
-                if(subc.length()>0) items += subc +", ";
+                    expre.charAt(i) == ')'
+            ) {
+                if(subc.length()>0) items += subc +", "; //Esta parte solo impide que se ponga una coma al principio
                 subc = "";
-                items += expre.substring(i,i+1) + ",";
-            } else subc += expre.substring(i,i+1) ;
+                items += expre.substring(i,i+1) + ","; // Aquí se agreaga el operador a la cola
+            } else subc += expre.substring(i,i+1) ; // Aquí se agreaga el numero a la cola
+            // CHECAR QUE ES "SUBC"
         }
-        if(subc.length()>0) items += subc +", ";
+        if(subc.length()>0) items += subc +", ";  //Esta parte es para poner una ',' despues de agregar algo a la cola
         return items;
     }
+
+
+
 
     // Metodo para evaluar la NP
     String evaluar( String NP ){
 
-        return "Q";
+        return NP;
     }
 
     public static void main(String[] args){
