@@ -23,24 +23,33 @@ public class Pila {
         this(6);
     }
 
-    public boolean vacio() {
+    public boolean vacia() {
+        System.out.println("La pila está vacia");
         return true;
     }
 
-    public boolean lleno(){
-        return true;
+    public boolean llena(){
+        System.out.println("La pila está llena");
+        return apuntador == (tamano-1);
+
+        //Mismo codigo pero largo
+        /*
+        if(apuntador == tamano)
+            return true;
+        return false;
+        */
     }
 
     public boolean push (String elemento) {
-//        if(lleno())
-//            return false;
+        if(llena())
+            return false;
         pila[apuntador + 1] = elemento;
         this.apuntador++;
         return true;
     }
 
     public boolean pop () {
-//        if(vacio())
+//        if(vacia())
 //            return false;
         this.apuntador--;
         return true;
@@ -59,9 +68,11 @@ public class Pila {
 
         pilaPrueba.pop();
         pilaPrueba.pop();
-        //pila.apuntador = pila.apuntador - 1;
 
         pilaPrueba.push("d");
         pilaPrueba.push("e");
+        pilaPrueba.push("f");
+        pilaPrueba.push("g");
+        pilaPrueba.push("h");
     }
 }
