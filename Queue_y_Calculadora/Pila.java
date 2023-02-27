@@ -7,16 +7,16 @@ package Queue_y_Calculadora;
  */
 
 public class Pila {
-    int[] pila;
+    String[] pila;
     int tamano;
     int pointer;
 
     //Constructor
     public Pila (int tamano){
-        pila = new int[tamano];
+        pila = new String[tamano];
         this.tamano = tamano;
         pointer = 0;
-        pila[0] = Integer.parseInt(null);
+        pila[0] = null;
     }
 
     public Pila(){      //Siempre tendrá el tamaño de 6, a menos que se especifique de otra manera
@@ -31,7 +31,7 @@ public class Pila {
         return false;
     }
 
-    public boolean push (int elemento) {
+    public boolean push (String elemento) {
         if(lleno())
             return false;
         pila[pointer + 1] = elemento;
@@ -45,7 +45,7 @@ public class Pila {
         return true;
     }
 
-    public int peek() {
+    public String peek() {
         return pila[pointer];
     }
 }
