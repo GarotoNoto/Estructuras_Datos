@@ -24,12 +24,10 @@ public class Pila {
     }
 
     public boolean vacia() {
-        System.out.println("La pila está vacia");
-        return true;
+        return apuntador == 0;
     }
 
     public boolean llena(){
-        System.out.println("La pila está llena");
         return apuntador == (tamano-1);
 
         //Mismo codigo pero largo
@@ -41,16 +39,20 @@ public class Pila {
     }
 
     public boolean push (String elemento) {
-        if(llena())
+        if(llena()){
+            System.out.println("La pila está llena");
             return false;
+        }
         pila[apuntador + 1] = elemento;
         this.apuntador++;
         return true;
     }
 
     public boolean pop () {
-//        if(vacia())
-//            return false;
+        if(vacia()){
+            System.out.println("La pila está vacia");
+            return false;
+        }
         this.apuntador--;
         return true;
     }
@@ -61,6 +63,8 @@ public class Pila {
 
     public static void main(String[] args){
         Pila pilaPrueba = new Pila();
+
+        pilaPrueba.pop();
 
         pilaPrueba.push("a");
         pilaPrueba.push("b");
