@@ -7,16 +7,15 @@ package Queue_y_Calculadora;
  */
 
 public class Pila {
-    char[] pila;
+    String[] pila;
     int tamano;
     int apuntador;
 
     //Constructor
     public Pila (int tamano){
-        pila = new char[tamano];
+        pila = new String[tamano];
         this.tamano = tamano;
         apuntador = -1;
-        //pila[0] = null;
     }
 
     public Pila(){      //Siempre tendrá el tamaño de 6, a menos que se especifique de otra manera
@@ -38,7 +37,7 @@ public class Pila {
         */
     }
 
-    public boolean push (char elemento) {
+    public boolean push (String elemento) {
         if(llena()){
             System.out.println("La pila está llena");
             return false;
@@ -57,8 +56,14 @@ public class Pila {
         return true;
     }
 
-    public char peek() {
+    public String peek() {
         return pila[apuntador];
+    }
+
+    public void vaciar(){
+        for(int i = 0; i < tamano; i++){
+            pila[i] = null;
+        }
     }
 
     public static void main(String[] args){
@@ -68,20 +73,22 @@ public class Pila {
         pilaPrueba.pop();
         pilaPrueba.pop();
 
-        pilaPrueba.push('a');
-        pilaPrueba.push('b');
-        pilaPrueba.push('c');
+        pilaPrueba.push("a");
+        pilaPrueba.push("b");
+        pilaPrueba.push("c");
 
         pilaPrueba.pop();
         pilaPrueba.pop();
         pilaPrueba.pop();
         pilaPrueba.pop();
 
-        pilaPrueba.push('d');
-        pilaPrueba.push('e');
-        pilaPrueba.push('f');
-        pilaPrueba.push('g');
-        pilaPrueba.push('h');
-        pilaPrueba.push('i');
+        pilaPrueba.push("d");
+        pilaPrueba.push("e");
+        pilaPrueba.push("f");
+        pilaPrueba.push("g");
+        pilaPrueba.push("h");
+        pilaPrueba.push("i");
+
+        pilaPrueba.vaciar();
     }
 }
