@@ -60,10 +60,16 @@ public class Pila {
         return pila[apuntador];
     }
 
+    public void setPeek() {
+        pila[apuntador] = null;
+        apuntador--;
+    }
+
     public void vaciar(){
         for(int i = 0; i < tamano; i++){
             pila[i] = null;
         }
+        apuntador = -1;
     }
 
     public static void main(String[] args){
