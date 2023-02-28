@@ -18,32 +18,18 @@ public class Proyecto_1_Calculadora extends JFrame{
     Proyecto_1_Calculadora(){
 
 
-        //  PARTE DE INTERFAZ GRÁFICA
+        // INICO DE PARTE DE INTERFAZ GRÁFICA
 
         //Label que muestra el resultado
         labelResultado.setBounds(127,60, 250,40);
 
         //Codigo que cambia el tamaño de la fuente
         Font FontOriginal = labelResultado.getFont();
-        String labelText = labelResultado.getText();
-
-        int stringWidth = labelResultado.getFontMetrics(FontOriginal).stringWidth(labelText);
-        int labelWidth = labelResultado.getWidth();
-        // Que tanto puede cambiar la fuente segun el width
-        double widthRatio = (double)labelWidth / (double)stringWidth;
-
-        int nuevoTamanoFont = (int)(FontOriginal.getSize() * widthRatio);
-        int labelHeight = labelResultado.getHeight();
-
-        // Elegir un nuevo tamano de fuente que no sea mas largo que el heigth del label
-        int tamanoFont = Math.min(nuevoTamanoFont, labelHeight);
-
-        labelResultado.setFont(new Font(FontOriginal.getName(), Font.PLAIN, tamanoFont));
+        labelResultado.setFont(new Font(FontOriginal.getName(), Font.PLAIN, 10));
 
         add(labelResultado);
 
         // Text Field entradaTxtF
-
         entradaTxtF.setBounds(20, 20, 290, 30);
         entradaTxtF.addMouseListener(new MouseAdapter() {
             @Override
@@ -65,11 +51,11 @@ public class Proyecto_1_Calculadora extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 //obtenerTokens(entradaTxtF.getText());
                 //System.out.println(obtenerTokens(entradaTxtF.getText()));
-
+                System.out.println(obtenerNotacion(entradaTxtF.getText()));
                 if (notacionRespuesta.equals("")){      //Si está vacia
                     notacionRespuesta = getTokens();
                     //labelResultado.setText(evaluar(notacionRespuesta));
-                    System.out.println(evaluar("37+"));
+                    System.out.println(evaluar("45*6-"));
                 } else {                                // Si ya tiene algo
                     //labelResultado.setText(evaluar(getTokens()));
                 }
@@ -92,7 +78,6 @@ public class Proyecto_1_Calculadora extends JFrame{
         add(botonNotacion);
 
         //Boton borrar "CC"
-
         botonBorrar.setBounds(320,21,30,29);
         botonBorrar.setMargin(new Insets(0, 0, 0, 0));
         botonBorrar.setFont(new Font(FontOriginal.getName(), Font.BOLD, 10));
@@ -105,7 +90,6 @@ public class Proyecto_1_Calculadora extends JFrame{
         });
         add(botonBorrar);
 
-
         setSize(380, 170);
         setLayout(null);
         setVisible(true);
@@ -114,14 +98,83 @@ public class Proyecto_1_Calculadora extends JFrame{
         setResizable(false);
     }
 
-    String obtenerTokens( String exprecion ) {
+    // FIN DE PARTE DE INTERFAZ GRÁFICA
+
+    //Función que obtiene Notación Postfija
+    String obtenerNotacion(String exprecion ) {
         exprecion = exprecion.replaceAll("\\s", "");   //Expreción para borar los espacios
-        char substraerChar = '\0'; //Busca los char que esten vacios
+        char caracter;
+        char ultimoCharPila;
+        String NPsalida = null;
 
-        return exprecion;
+        for(int i = 0; i < exprecion.length(); i++){
+            caracter = exprecion.charAt(i);
+            if(Character.isDigit(caracter))                   // Si es un digito entonces va directo a la salida
+                NPsalida += caracter;
+            else if(caracter == '+' ||             //Si es operando va a la pila
+                    caracter == '-' ||
+                    caracter == '*' ||
+                    caracter == '/' )
+            {
+                if(pila.vacia()){
+                    pila.push(String.valueOf(caracter));
+                    continue;
+                }
+
+                ultimoCharPila = pila.peek().charAt(0); // De String a char
+
+                if(ultimoCharPila == '+' || ultimoCharPila == '-') {
+                    if(caracter == '+' || caracter == '-'){
+                        NPsalida += ultimoCharPila;
+                        pila.pop();
+                        pila.push(String.valueOf(caracter));
+                    } else if(caracter == '*' || caracter == '/'){
+                        pila.push(String.valueOf(caracter));
+                    }
+                }
+                else if(ultimoCharPila == '*' || ultimoCharPila == '/'){
+                    if(caracter == '*' || caracter == '/'){
+                        NPsalida += ultimoCharPila;
+                        pila.pop();
+                        pila.push(String.valueOf(caracter));
+                    } else if(caracter == '+' || caracter == '-'){
+                        NPsalida += ultimoCharPila;
+                        ultimoCharPila = ' ';
+                        pila.pop();
+                        if(!pila.vacia()){
+                            NPsalida += ultimoCharPila;
+                            pila.pop();
+                        }
+                        pila.push(String.valueOf(caracter));
+                    }
+                    /*
+                    if(caracter == '+' || caracter == '-'){
+                        pila.push(pila.peek());
+                        pila.pop();
+                        pila.push(pila.peek());
+                        pila.push(String.valueOf(caracter));
+                    }
+
+                     */
+                }
+
+
+                /*
+                if(tail == caracter){
+
+                } else if (tail == '*' || tail == '/') {
+                    pila.push(String.valueOf(caracter));
+                }
+
+                if(tail != '(' || tail != '*' || tail != '/') {
+                    pila.push(String.valueOf(caracter));
+                }
+                 */
+            }
+        } // Fin For
+
+        return NPsalida;
     }
-
-    // TODO: Areglar 'getTockens()' para que de la Notación Postfija
 
     //  PARTE DE NOTACIÓN POSTFIJA
     String getTokens() {
@@ -151,22 +204,19 @@ public class Proyecto_1_Calculadora extends JFrame{
         return items;
     }
 
-    /*
-        TODO: Investigar como agregar jerrarquia en las operaciones
-        TODO: Terminar el 'evaluar()' con al menos los operandos binarios
-    */
-
 
     // Metodo para evaluar la NP
     String evaluar( String NP ){
+        pila.vaciar();
+
         char caracter;
-        char op2, op1;
+        String op2, op1;
         double r = 0;
 
         for(int i = 0; i < NP.length(); i++){
             caracter = NP.charAt(i);
             if( Character.isDigit(caracter) ){                        //Si es un número
-                pila.push(caracter);
+                pila.push(String.valueOf(caracter));
             } else if (caracter == '!' || caracter == '¬') {          // Si es operador unario
                 op2 = pila.peek();
                 pila.pop();
@@ -174,19 +224,34 @@ public class Proyecto_1_Calculadora extends JFrame{
                 op2 = pila.peek();
                 pila.pop();
                 op1 = pila.peek();
-
-                r = r + Double.parseDouble(String.valueOf(op2)) + Double.parseDouble(String.valueOf(op1));
-                r = Math.round(r*100)/100.0;  //Para redondear a dos decimales
-                caracter = (char) r;
-                System.out.println(caracter);
-                pila.push(caracter);
+                r = 0;
+                switch (caracter) {
+                    case '+':
+                        r = r + Double.parseDouble(String.valueOf(op1)) + Double.parseDouble(String.valueOf(op2));
+                        r = round(r*100)/100.0;  //Para redondear a dos decimales
+                        pila.push(String.valueOf(r));
+                        break;
+                    case '-':
+                        r = r + Double.parseDouble(String.valueOf(op1)) - Double.parseDouble(String.valueOf(op2));
+                        r = round(r*100)/100.0;  //Para redondear a dos decimales
+                        pila.push(String.valueOf(r));
+                        break;
+                    case '*':
+                        r = r + Double.parseDouble(String.valueOf(op1)) * Double.parseDouble(String.valueOf(op2));
+                        r = round(r*100)/100.0;  //Para redondear a dos decimales
+                        pila.push(String.valueOf(r));
+                        break;
+                    case '/':
+                        r = r + Double.parseDouble(String.valueOf(op2)) / Double.parseDouble(String.valueOf(op1)); // ??
+                        r = round(r*100)/100.0;  //Para redondear a dos decimales
+                        pila.push(String.valueOf(r));
+                        break;
+                } //Fin switch
 
             } // Fin else
 
         } // Fin for
-        return NP;
-        //TODO comvertir de double a string y de string a char
-
+        return pila.peek();
     }
 
     public static void main(String[] args){
