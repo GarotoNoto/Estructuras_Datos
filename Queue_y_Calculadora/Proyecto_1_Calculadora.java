@@ -14,6 +14,7 @@ public class Proyecto_1_Calculadora extends JFrame{
     JButton botonNotacion = new JButton("NP");
     JButton botonBorrar = new JButton("CC");
     String notacionRespuesta = "";
+    String NPsalida = "";
 
     Proyecto_1_Calculadora(){
 
@@ -36,7 +37,7 @@ public class Proyecto_1_Calculadora extends JFrame{
             public void mouseReleased(MouseEvent e) {
                 super.mouseReleased(e);
                 notacionRespuesta = "";
-                //labelResultado.setText(notacionRespuesta);
+                NPsalida = "";
             }
         });
 
@@ -49,15 +50,11 @@ public class Proyecto_1_Calculadora extends JFrame{
         botonResul.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //obtenerTokens(entradaTxtF.getText());
-                //System.out.println(obtenerTokens(entradaTxtF.getText()));
-                System.out.println(obtenerNotacion(entradaTxtF.getText()));
-                if (notacionRespuesta.equals("")){      //Si está vacia
-                    notacionRespuesta = getTokens();
-                    //labelResultado.setText(evaluar(notacionRespuesta));
-                    System.out.println(evaluar("45*6-"));
-                } else {                                // Si ya tiene algo
-                    //labelResultado.setText(evaluar(getTokens()));
+                if (notacionRespuesta.equals("")){              //Si está vacia
+                    notacionRespuesta = obtenerNotacion(entradaTxtF.getText());
+                    labelResultado.setText(evaluar(notacionRespuesta));
+                } else {                                        // Si ya tiene algo
+                    labelResultado.setText(evaluar(notacionRespuesta));
                 }
             }
         });
@@ -70,7 +67,7 @@ public class Proyecto_1_Calculadora extends JFrame{
         botonNotacion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                notacionRespuesta = getTokens();
+                notacionRespuesta = obtenerNotacion(entradaTxtF.getText());
                 labelResultado.setText(notacionRespuesta);
                 System.out.println(notacionRespuesta);
             }
@@ -86,6 +83,7 @@ public class Proyecto_1_Calculadora extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 notacionRespuesta = "";
                 entradaTxtF.setText(" ");
+                NPsalida = "";
             }
         });
         add(botonBorrar);
@@ -100,12 +98,14 @@ public class Proyecto_1_Calculadora extends JFrame{
 
     // FIN DE PARTE DE INTERFAZ GRÁFICA
 
+    //  PARTE DE NOTACIÓN POSTFIJA
     //Función que obtiene Notación Postfija
     String obtenerNotacion(String exprecion ) {
+        pila.vaciar();
         exprecion = exprecion.replaceAll("\\s", "");   //Expreción para borar los espacios
         char caracter;
         char ultimoCharPila;
-        String NPsalida = null;
+        NPsalida = "";
 
         for(int i = 0; i < exprecion.length(); i++){
             caracter = exprecion.charAt(i);
@@ -139,10 +139,9 @@ public class Proyecto_1_Calculadora extends JFrame{
                         pila.push(String.valueOf(caracter));
                     } else if(caracter == '+' || caracter == '-'){
                         NPsalida += ultimoCharPila;
-                        ultimoCharPila = ' ';
-                        pila.pop();
+                        pila.setPeek();
                         if(!pila.vacia()){
-                            NPsalida += ultimoCharPila;
+                            NPsalida += pila.peek();
                             pila.pop();
                         }
                         pila.push(String.valueOf(caracter));
@@ -171,12 +170,18 @@ public class Proyecto_1_Calculadora extends JFrame{
                 }
                  */
             }
+
         } // Fin For
+        if(!pila.vacia()){
+            NPsalida += pila.peek();
+            pila.setPeek();
+            pila.pop();
+        }
 
         return NPsalida;
     }
 
-    //  PARTE DE NOTACIÓN POSTFIJA
+    /*
     String getTokens() {
         String items = "";
         String subc = "";
@@ -203,6 +208,8 @@ public class Proyecto_1_Calculadora extends JFrame{
         if(subc.length()>0) items = items + (subc + ", ");  //Esta parte es para poner una ',' despues de agregar algo a la cola
         return items;
     }
+
+     */
 
 
     // Metodo para evaluar la NP
