@@ -19,7 +19,7 @@ public class Pila {
     }
 
     public Pila(){      //Siempre tendrá el tamaño de 6, a menos que se especifique de otra manera
-        this(5);
+        this(10);
     }
 
     public boolean vacia() {
