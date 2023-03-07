@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import static java.lang.Math.round;
 
-public class Proyecto_1_Calculadora extends JFrame{
+public class Josue_Galindo_Lopez_Calculadora extends JFrame{
     Pila pila = new Pila();
 
     JLabel labelResultado = new JLabel("Introduzca la expreción algebraica a evaluar");
@@ -16,7 +16,7 @@ public class Proyecto_1_Calculadora extends JFrame{
     String notacionRespuesta = "";
     String NPsalida = "";
 
-    Proyecto_1_Calculadora(){
+    Josue_Galindo_Lopez_Calculadora(){
 
 
         // INICO DE PARTE DE INTERFAZ GRÁFICA
@@ -146,30 +146,8 @@ public class Proyecto_1_Calculadora extends JFrame{
                         }
                         pila.push(String.valueOf(caracter));
                     }
-                    /*
-                    if(caracter == '+' || caracter == '-'){
-                        pila.push(pila.peek());
-                        pila.pop();
-                        pila.push(pila.peek());
-                        pila.push(String.valueOf(caracter));
-                    }
-
-                     */
                 }
-
-
-                /*
-                if(tail == caracter){
-
-                } else if (tail == '*' || tail == '/') {
-                    pila.push(String.valueOf(caracter));
-                }
-
-                if(tail != '(' || tail != '*' || tail != '/') {
-                    pila.push(String.valueOf(caracter));
-                }
-                 */
-            }
+            }// Fin if principal
 
         } // Fin For
         if(!pila.vacia()){
@@ -236,21 +214,25 @@ public class Proyecto_1_Calculadora extends JFrame{
                     case '+':
                         r = r + Double.parseDouble(String.valueOf(op1)) + Double.parseDouble(String.valueOf(op2));
                         r = round(r*100)/100.0;  //Para redondear a dos decimales
+                        pila.setPeek();
                         pila.push(String.valueOf(r));
                         break;
                     case '-':
                         r = r + Double.parseDouble(String.valueOf(op1)) - Double.parseDouble(String.valueOf(op2));
                         r = round(r*100)/100.0;  //Para redondear a dos decimales
+                        pila.setPeek();
                         pila.push(String.valueOf(r));
                         break;
                     case '*':
                         r = r + Double.parseDouble(String.valueOf(op1)) * Double.parseDouble(String.valueOf(op2));
                         r = round(r*100)/100.0;  //Para redondear a dos decimales
+                        pila.setPeek();
                         pila.push(String.valueOf(r));
                         break;
                     case '/':
                         r = r + Double.parseDouble(String.valueOf(op2)) / Double.parseDouble(String.valueOf(op1)); // ??
                         r = round(r*100)/100.0;  //Para redondear a dos decimales
+                        pila.setPeek();
                         pila.push(String.valueOf(r));
                         break;
                 } //Fin switch
@@ -262,6 +244,6 @@ public class Proyecto_1_Calculadora extends JFrame{
     }
 
     public static void main(String[] args){
-        new Proyecto_1_Calculadora();
+        new Josue_Galindo_Lopez_Calculadora();
     }
 }
