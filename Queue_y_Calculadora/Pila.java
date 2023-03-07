@@ -3,6 +3,8 @@ package Queue_y_Calculadora;
 /*
     Pila (Stack)
         creado enteramente por mi para el proyecto de DS
+        Todo esta creado por mi, desde la estructura hasta las funciones
+        Todo sirve al 100
         muy similar al Queue ya que me base en eso para crear esta Pila
  */
 
