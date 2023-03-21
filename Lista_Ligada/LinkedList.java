@@ -1,3 +1,5 @@
+package Lista_Ligada;
+
 class LinkedList {
     // Crea un nodo
     Node head;
@@ -12,6 +14,39 @@ class LinkedList {
         }
     }
 
+    public void printList(){
+        Node n = head;
+        while (n != null){
+            System.out.print(n.value + " ");
+            n = n.next;
+        }
+    }
+
+    public void pushFront(int value){
+        Node newHead = new Node(value);
+        head.next = head;
+        this.head = newHead;
+    }
+
+    public void pushTail(int value){
+        Node newTail = new Node(value);
+        if(head == null){
+            head = newTail;
+            return;
+        }
+        newTail.next = null;
+        Node tail = head;
+        while(tail.next != null)
+            tail = tail.next;
+        tail.next = newTail;
+    }
+
+    public void push(Node prev_node, int value){
+        Node newNode = new Node(value);
+        newNode.next = prev_node.next;
+        prev_node.next = newNode;
+    }
+
     public static void main(String[] args){
         LinkedList ListaLigada = new LinkedList();
 
@@ -24,10 +59,6 @@ class LinkedList {
         ListaLigada.head.next = second;
         second.next = third;
 
-        //Imprimiendo valores
-        while (ListaLigada.head != null){
-            System.out.print(ListaLigada.head.value + " ");
-            ListaLigada.head = ListaLigada.head.next;
-        }
+
     }
 }
