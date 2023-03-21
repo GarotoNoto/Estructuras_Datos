@@ -25,9 +25,8 @@ public class Lista_clase implements Interface{
     public void altaIni(int ele) {
         Nodo nvo = new Nodo(ele); // crea un nuevo nodo
         nvo.liga = apuntador; // señala al dato siguiente
-        apuntador = nvo; // se hace que L indique el nodo que acaba de
+        apuntador = nvo; // se hace que apuntador indique el nodo que acaba de
         numNodos++; // indica el numero de nodos de la lista ligada
-
     }
 
     @Override
@@ -85,6 +84,17 @@ public class Lista_clase implements Interface{
             lista = lista.liga; // avanza el siguiente nodo de la lista ligada
         }
         return sal;
+    }
+
+    public static void main(String[] args){
+        Lista_clase lista = new Lista_clase();
+        lista.altaIni(6);
+        System.out.println(lista);
+
+        lista.altaIni(9);
+        lista.altaIni(4);
+        lista.altaIni(1);
+        System.out.println(lista);
     }
 
 }
