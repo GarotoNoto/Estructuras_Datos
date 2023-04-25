@@ -22,7 +22,7 @@ class LinkedList {
         }
     }
 
-    public void pushFront(int value){
+    public void pushHead(int value){
         Node newHead = new Node(value);
         head.next = head;
         this.head = newHead;
@@ -42,9 +42,21 @@ class LinkedList {
     }
 
     public void push(Node prev_node, int value){
+        if(prev_node == null){
+            System.out.print("El nodo anterior no puede ser nulo");
+            return;
+        }
         Node newNode = new Node(value);
         newNode.next = prev_node.next;
         prev_node.next = newNode;
+    }
+
+    public void popHead(){
+        head = head.next;
+    }
+
+    public void popTail(){
+
     }
 
     public static void main(String[] args){
