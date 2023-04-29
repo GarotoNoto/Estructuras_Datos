@@ -22,12 +22,12 @@ public class proyecto_dos_Arboles {
         raiz = null;
     }
 
-    private Nodo alta(Nodo actual, int dato){
-        if(actual == null){ //está en la posición del nuevo nodo
+    private Nodo alta(Nodo actual, int dato){       //Siempre se compara con la raiz y va "bajando"; "Nodo actual" podría llamarse "Nodo nodoAComparar"
+        if(actual == null){         //está en la posición del nuevo nodo
             Nodo nvo = new Nodo(dato);
             return nvo;
         }
-        if(dato>actual.dato){
+        if(dato>actual.dato){ //Se compara con la "raiz", y de ahi para abajo
             actual.hijoDer = alta(actual.hijoDer, dato);
         } else {
             actual.hijoIzq = alta(actual.hijoIzq, dato);
@@ -99,7 +99,7 @@ public class proyecto_dos_Arboles {
 
 
     /* CODIGO DEL PROYECTO */
-    public void buscarGen(){      //1. Un recorrido que proporcione los nodos de la generacion solicitada por el usuario
+    public void buscarGen(int gener){      //1. Un recorrido que proporcione los nodos de la generacion solicitada por el usuario
 
     }
 
@@ -155,19 +155,25 @@ public class proyecto_dos_Arboles {
             if(opc.equals("Inverso")){
                 abbP.enOrdenInv();
             }
+
+            /* CODIGO DEL PRYECTO */
             if(opc.equals("Buscar Generación")){
-                abbP.buscarGen();
+                datoTxt = JOptionPane.showInputDialog(null, "Introduce la generación que quieres ver", "Buscar Generación", JOptionPane.QUESTION_MESSAGE);
+                dato = Integer.parseInt(datoTxt);
+                abbP.buscarGen(dato);
+                JOptionPane.showMessageDialog(null, "Los nodos de la generación " + datoTxt + ": ", "Buscar Generación", 1);
             }
             if(opc.equals("Descenciente")){
                 abbP.datosDescen();
+                JOptionPane.showMessageDialog(null, "El arbol se imprimió de forma descendente en la consola");
             }
             if(opc.equals("Profundidad")){
                 int profundidad = abbP.profundidad();
-                JOptionPane.showMessageDialog(null, "La profuncidad del arbol es de " + profundidad, "Profundidad", 1);
+                JOptionPane.showMessageDialog(null, "La profundidad del arbol es de " + profundidad, "Profundidad", 1);
             }
             if(opc.equals("Total Nodos")){
                 int totalNodos = abbP.totalNodos();
-                JOptionPane.showMessageDialog(null, "El número total de nodos es de " + totalNodos, "Total Nodos", 1);
+                JOptionPane.showMessageDialog(null, "Este arbol tiene un total de " + totalNodos + " nodos", "Total Nodos", 1);
             }
         }
 
