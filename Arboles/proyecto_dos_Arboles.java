@@ -1,7 +1,5 @@
 package Arboles;
 
-//import javax.swing.*;
-//import javax.print.attribute.standard.JobKOctetsProcessed;
 import javax.swing.JOptionPane;
 
 public class proyecto_dos_Arboles {
@@ -121,10 +119,12 @@ public class proyecto_dos_Arboles {
         }
     }
 
-
-
-    public void datosDescen(){     //2. Un recorrido que proporcione los datos del arbol en orden descendente
-
+    public void descendiente(Nodo actual){     //2. Un recorrido que proporcione los datos del arbol en orden descendente
+        if(actual != null){
+            descendiente(actual.hijoDer);
+            System.out.print(actual.dato + "\t");
+            descendiente(actual.hijoIzq);
+        }
     }
 
     public int profundidad(Nodo actual){       //3. Una funcion que determine la profundidad del arbol asumiendo que la raiz tiene una profundidad uno.
@@ -165,11 +165,11 @@ public class proyecto_dos_Arboles {
     *   C = 2
     *
     *   A = Math.max(B, C) + 1 => Math.max(2, 2) + 1 = 3
-    * El arbol, entonces, tiene una profundidad de 3
-    * */
+    * El arbol, entonces, tiene una profundidad de 3 */
 
     public int totalNodos(){        //4. Una operacion que cuente el total de nodos del arbol.
         int total = TN(raiz);
+        contadorNodos = 0;
         return total;
     }
 
@@ -184,7 +184,7 @@ public class proyecto_dos_Arboles {
 
     public static void main(String[] args){
         String opc;
-        String[] opcs = {"Alta", "Baja", "En Orden", "Inverso", "Buscar Generación", "Descenciente", "Profundidad", "Total Nodos", "Fin"};
+        String[] opcs = {"Alta", "Baja", "En Orden", "Inverso", "   --------", " - Buscar Generación", " - Descenciente", " - Profundidad", " - Total Nodos", "Fin"};
         proyecto_dos_Arboles abbP = new proyecto_dos_Arboles();
         int dato;
         String datoTxt;
@@ -202,7 +202,7 @@ public class proyecto_dos_Arboles {
         abbP.altaRec(320);
 
         while(true){        //5. incluya un menu para el uso del programa.
-            opc = (String) JOptionPane.showInputDialog(null, "Elije una opción", "Menú", JOptionPane.QUESTION_MESSAGE, null, opcs, opcs[8]);
+            opc = (String) JOptionPane.showInputDialog(null, "Elije una opción", "Menú", JOptionPane.QUESTION_MESSAGE, null, opcs, opcs[9]);
             if(opc.compareTo("Fin") == 0) break;
             if(opc.compareTo("Alta") == 0){
                 datoTxt = JOptionPane.showInputDialog(null, "introduce el dato", "Alta", JOptionPane.QUESTION_MESSAGE);
@@ -222,21 +222,22 @@ public class proyecto_dos_Arboles {
             }
 
             /* CODIGO DEL PRYECTO */
-            if(opc.equals("Buscar Generación")){
+            if(opc.equals(" - Buscar Generación")){
                 datoTxt = JOptionPane.showInputDialog(null, "Introduce la generación que quieres ver", "Buscar Generación", JOptionPane.QUESTION_MESSAGE);
                 dato = Integer.parseInt(datoTxt);
                 datoTxt = abbP.buscarGen(dato);
                 JOptionPane.showMessageDialog(null, "Los nodos de la generación " + datoTxt + " son: " + datoTxt, "Buscar Generación", 1);
             }
-            if(opc.equals("Descenciente")){
-                abbP.datosDescen();
-                JOptionPane.showMessageDialog(null, "El arbol se imprimió de forma descendente en la consola");
+            if(opc.equals(" - Descenciente")){
+                abbP.descendiente(abbP.raiz);
+                JOptionPane.showMessageDialog(null, "El arbol se imprimió de forma descendente en la consola", "Datos Descendientes", 1);
+                System.out.println();
             }
-            if(opc.equals("Profundidad")){
+            if(opc.equals(" - Profundidad")){
                 int profundidad = abbP.profundidad(abbP.raiz);
                 JOptionPane.showMessageDialog(null, "La profundidad del arbol es de " + profundidad, "Profundidad", 1);
             }
-            if(opc.equals("Total Nodos")){
+            if(opc.equals(" - Total Nodos")){
                 int totalNodos = abbP.totalNodos();
                 JOptionPane.showMessageDialog(null, "Este arbol tiene un total de " + totalNodos + " nodos", "Total Nodos", 1);
                 totalNodos = 0;
