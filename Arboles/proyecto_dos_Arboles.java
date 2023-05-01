@@ -168,8 +168,8 @@ public class proyecto_dos_Arboles {
     * El arbol, entonces, tiene una profundidad de 3 */
 
     public int totalNodos(){        //4. Una operacion que cuente el total de nodos del arbol.
-        int total = TN(raiz);
         contadorNodos = 0;
+        int total = TN(raiz);
         return total;
     }
 
@@ -201,7 +201,7 @@ public class proyecto_dos_Arboles {
         abbP.altaRec(330);
         abbP.altaRec(320);
 
-        while(true){        //5. incluya un menu para el uso del programa.
+        while(true){                        //5. incluya un menu para el uso del programa.
             opc = (String) JOptionPane.showInputDialog(null, "Elije una opción", "Menú", JOptionPane.QUESTION_MESSAGE, null, opcs, opcs[9]);
             if(opc.compareTo("Fin") == 0) break;
             if(opc.compareTo("Alta") == 0){
