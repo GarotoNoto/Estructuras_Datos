@@ -3,9 +3,9 @@ package Arboles;
 //import javax.swing.*;
 //import javax.print.attribute.standard.JobKOctetsProcessed;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 public class proyecto_dos_Arboles {
+    int contadorNodos = 0;
     class Nodo{
         int dato;
         Nodo hijoIzq, hijoDer;
@@ -99,22 +99,87 @@ public class proyecto_dos_Arboles {
 
 
     /* CODIGO DEL PROYECTO */
-    public void buscarGen(int gener){      //1. Un recorrido que proporcione los nodos de la generacion solicitada por el usuario
+    // NO SIRVE
+    public String buscarGen(int gen){      //1. Un recorrido que proporcione los nodos de la generacion solicitada por el usuario
+        Nodo actual;
+        if(gen != 1){
+            gen--;
+            buscarGen(gen);
+
+        }
+        BG(raiz, gen);
+        //if(gener == 1) return String.valueOf(raiz.dato);
+        return "a";
+    }
+
+    public void BG(Nodo actual, int gen){
+        if(gen != 1){
+            gen--;
+            BG(actual.hijoIzq, gen);
+            System.out.print(actual.hijoIzq.dato + "\t" + actual.hijoDer.dato);
+            return;
+        }
+    }
+
+
+
+    public void datosDescen(){     //2. Un recorrido que proporcione los datos del arbol en orden descendente
 
     }
 
-    public void datosDescen(){     //2. Un recorrido que proporcione los datos del ´arbol en orden descendente
-
+    public int profundidad(Nodo actual){       //3. Una funcion que determine la profundidad del arbol asumiendo que la raiz tiene una profundidad uno.
+        if(actual == null) return 0;
+        contadorNodos = Math.max(profundidad(actual.hijoIzq), profundidad(actual.hijoDer)) + 1;
+        return contadorNodos;
     }
 
-    public int profundidad(){       //3. Una funcion que determine la profundidad del ´arbol asumiendo que la raiz tiene una profundidad uno.
-
-        return 1;
-    }
+    /* La fucnión "profundidad" se llama con la raiz como inicio
+    * Despues entra en la función "Math.max", que compara dos números y devulve el mayor
+    * cada vez que intenta comparar un número tiene que recursar la función "profundidad"
+    * recursa hacia la izquierda del arbol hasta encontrar un nodo null
+    * cuando encuentra un null regresa 0, y "Math.max" obtiene el primer valor que buscaba
+    *
+    * Ahora se va a la derecha del nodo y hace lo mismo hasta que obtiene otro null
+    * Cuando obtiene los dos null los compara (que sale 0 en esta primera iteración) y le suma 1
+    *   (Esto porque es el nodo es una hoja)
+    * esto a su vez hace que "Math.max" obtenga su primer valor (el de las a la izquierda)
+    *   y procede a obtener el valor de la derecha, recursando hasta encontrarlo
+    *
+    *   MAPA EN EL QUE SE PUEDE VER LA RECURSIÓN
+    *
+    *                           A
+    *                          / \
+    *                         B   C
+    *                        / \   \
+    *                       D   E   F
+    *
+    *   A = Math.max(B, C) + 1              // "Math.max" tiene que ir a B primero, y ahi recursa hacia D y E
+    *
+    *   B = Math.max(D, E) + 1
+    *   D = Math.max(0,0) + 1 = 1           // Como D y E son hojas, "Math.max" devulve 0 y le suma 1
+    *   E = Math.max(0,0) + 1 = 1
+    *   B = 2                               // "Math.max" encuentra los valores de izquierda y derecha, los compara y le suma 1
+    *
+    *   C = Math.max(0, F) + 1
+    *   F = Math.max(0,0) + 1 = 1
+    *   C = 2
+    *
+    *   A = Math.max(B, C) + 1 => Math.max(2, 2) + 1 = 3
+    * El arbol, entonces, tiene una profundidad de 3
+    * */
 
     public int totalNodos(){        //4. Una operacion que cuente el total de nodos del arbol.
+        int total = TN(raiz);
+        return total;
+    }
 
-        return 1;
+    public int TN(Nodo actual){
+        if(actual != null){
+            TN(actual.hijoIzq);
+            contadorNodos++;
+            TN(actual.hijoDer);
+        }
+        return contadorNodos;
     }
 
     public static void main(String[] args){
@@ -160,20 +225,21 @@ public class proyecto_dos_Arboles {
             if(opc.equals("Buscar Generación")){
                 datoTxt = JOptionPane.showInputDialog(null, "Introduce la generación que quieres ver", "Buscar Generación", JOptionPane.QUESTION_MESSAGE);
                 dato = Integer.parseInt(datoTxt);
-                abbP.buscarGen(dato);
-                JOptionPane.showMessageDialog(null, "Los nodos de la generación " + datoTxt + ": ", "Buscar Generación", 1);
+                datoTxt = abbP.buscarGen(dato);
+                JOptionPane.showMessageDialog(null, "Los nodos de la generación " + datoTxt + " son: " + datoTxt, "Buscar Generación", 1);
             }
             if(opc.equals("Descenciente")){
                 abbP.datosDescen();
                 JOptionPane.showMessageDialog(null, "El arbol se imprimió de forma descendente en la consola");
             }
             if(opc.equals("Profundidad")){
-                int profundidad = abbP.profundidad();
+                int profundidad = abbP.profundidad(abbP.raiz);
                 JOptionPane.showMessageDialog(null, "La profundidad del arbol es de " + profundidad, "Profundidad", 1);
             }
             if(opc.equals("Total Nodos")){
                 int totalNodos = abbP.totalNodos();
                 JOptionPane.showMessageDialog(null, "Este arbol tiene un total de " + totalNodos + " nodos", "Total Nodos", 1);
+                totalNodos = 0;
             }
         }
 
