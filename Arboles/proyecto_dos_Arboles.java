@@ -3,7 +3,8 @@ package Arboles;
 import javax.swing.JOptionPane;
 
 public class proyecto_dos_Arboles {
-    int contadorNodos = 0;
+    private int contadorNodos = 0;
+    private String mensaje = "";
     class Nodo{
         int dato;
         Nodo hijoIzq, hijoDer;
@@ -103,7 +104,6 @@ public class proyecto_dos_Arboles {
         if(gen != 1){
             gen--;
             buscarGen(gen);
-
         }
         BG(raiz, gen);
         //if(gener == 1) return String.valueOf(raiz.dato);
@@ -119,15 +119,20 @@ public class proyecto_dos_Arboles {
         }
     }
 
-    public void descendiente(Nodo actual){     //2. Un recorrido que proporcione los datos del arbol en orden descendente
+
+        //2. Un recorrido que proporcione los datos del arbol en orden descendente
+    public String descendiente(Nodo actual){
         if(actual != null){
             descendiente(actual.hijoDer);
-            System.out.print(actual.dato + "\t");
+            mensaje = mensaje  + ", " + String.valueOf(actual.dato);
             descendiente(actual.hijoIzq);
         }
+        return mensaje;
     }
 
-    public int profundidad(Nodo actual){       //3. Una funcion que determine la profundidad del arbol asumiendo que la raiz tiene una profundidad uno.
+
+        //3. Una funcion que determine la profundidad del arbol asumiendo que la raiz tiene una profundidad uno.
+    public int profundidad(Nodo actual){
         if(actual == null) return 0;
         contadorNodos = Math.max(profundidad(actual.hijoIzq), profundidad(actual.hijoDer)) + 1;
         return contadorNodos;
@@ -167,7 +172,9 @@ public class proyecto_dos_Arboles {
     *   A = Math.max(B, C) + 1 => Math.max(2, 2) + 1 = 3
     * El arbol, entonces, tiene una profundidad de 3 */
 
-    public int totalNodos(){        //4. Una operacion que cuente el total de nodos del arbol.
+
+        //4. Una operacion que cuente el total de nodos del arbol.
+    public int totalNodos(){
         contadorNodos = 0;
         int total = TN(raiz);
         return total;
@@ -229,9 +236,10 @@ public class proyecto_dos_Arboles {
                 JOptionPane.showMessageDialog(null, "Los nodos de la generación " + datoTxt + " son: " + datoTxt, "Buscar Generación", 1);
             }
             if(opc.equals(" - Descenciente")){
-                abbP.descendiente(abbP.raiz);
-                JOptionPane.showMessageDialog(null, "El arbol se imprimió de forma descendente en la consola", "Datos Descendientes", 1);
-                System.out.println();
+                datoTxt = abbP.descendiente(abbP.raiz);
+                datoTxt = datoTxt.substring(1);
+                JOptionPane.showMessageDialog(null, "Descendente: " + datoTxt, "Datos Descendientes", 1);
+                abbP.mensaje = "";
             }
             if(opc.equals(" - Profundidad")){
                 int profundidad = abbP.profundidad(abbP.raiz);
@@ -240,7 +248,6 @@ public class proyecto_dos_Arboles {
             if(opc.equals(" - Total Nodos")){
                 int totalNodos = abbP.totalNodos();
                 JOptionPane.showMessageDialog(null, "Este arbol tiene un total de " + totalNodos + " nodos", "Total Nodos", 1);
-                totalNodos = 0;
             }
         }
 
