@@ -1,10 +1,13 @@
 package Arboles;
 
 import javax.swing.JOptionPane;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class proyecto_dos_Arboles {
     private int contadorNodos = 0;
     private String mensaje = "";
+    Queue<Nodo> listaGen = new LinkedList<>();
     class Nodo{
         int dato;
         Nodo hijoIzq, hijoDer;
@@ -98,27 +101,46 @@ public class proyecto_dos_Arboles {
 
 
     /* CODIGO DEL PROYECTO */
-    // NO SIRVE
-    public String buscarGen(int gen){      //1. Un recorrido que proporcione los nodos de la generacion solicitada por el usuario
-        Nodo actual;
-        if(gen != 1){
-            gen--;
-            buscarGen(gen);
+
+    //  Función que muestra el arbol ordenado conforme a sus generaciones
+    /*public void LOT(Nodo actual){
+        if(actual != null){
+            if(actual.hijoIzq != null) listaGen.offer(actual.hijoIzq);
+            if(actual.hijoDer != null)listaGen.offer(actual.hijoDer);
+            System.out.print(actual.dato + "\t");
+            LOT(listaGen.poll());
         }
-        BG(raiz, gen);
+    }*/
+
+        //1. Un recorrido que proporcione los nodos de la generacion solicitada por el usuario
+    public void buscarGen(int gen){
         //if(gener == 1) return String.valueOf(raiz.dato);
-        return "a";
+        BG(raiz, gen);
     }
 
     public void BG(Nodo actual, int gen){
-        if(gen != 1){
+        /*if(actual != null){
+            if(actual.hijoIzq != null) listaGen.offer(actual.hijoIzq);
+            if(actual.hijoDer != null)listaGen.offer(actual.hijoDer);
             gen--;
-            BG(actual.hijoIzq, gen);
-            System.out.print(actual.hijoIzq.dato + "\t" + actual.hijoDer.dato);
+            if(gen == 0){
+                for (Nodo node: listaGen){
+                    System.out.print(node.dato + "\t");
+                }
+                return;
+            }
+            BG(listaGen.poll(), gen);
+        }*/
+        if(actual == null){
             return;
         }
+        if(gen == 0){
+            System.out.print(actual.dato + "\t");
+        } else {
+            BG(actual.hijoIzq, gen - 1);
+            BG(actual.hijoDer, gen - 1);
+        }
     }
-
 
         //2. Un recorrido que proporcione los datos del arbol en orden descendente
     public String descendiente(Nodo actual){
@@ -232,8 +254,11 @@ public class proyecto_dos_Arboles {
             if(opc.equals(" - Buscar Generación")){
                 datoTxt = JOptionPane.showInputDialog(null, "Introduce la generación que quieres ver", "Buscar Generación", JOptionPane.QUESTION_MESSAGE);
                 dato = Integer.parseInt(datoTxt);
-                datoTxt = abbP.buscarGen(dato);
-                JOptionPane.showMessageDialog(null, "Los nodos de la generación " + datoTxt + " son: " + datoTxt, "Buscar Generación", 1);
+                //datoTxt = abbP.buscarGen(dato);
+                abbP.buscarGen(dato);
+                //JOptionPane.showMessageDialog(null, "Los nodos de la generación " + datoTxt + " son: " + datoTxt, "Buscar Generación", 1);
+                //abbP.LOT(abbP.raiz);
+                abbP.listaGen.clear();
             }
             if(opc.equals(" - Descenciente")){
                 datoTxt = abbP.descendiente(abbP.raiz);
